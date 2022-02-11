@@ -1,0 +1,27 @@
+{% extends 'integers/base.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 mx-auto mt-5">
+                <h1 id="ints">
+                    {{ text }}
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var socket = new WebSocket('ws://127.0.0.1:9500/ws/some_url/');
+
+        socket.onmessage = function(event) {
+            var data = JSON.parse(event.data);
+            console.log(data);
+
+            document.querySelector('#ints').innerText = data.message;
+        }
+    </script>
+</body>
+{% endblock %}
